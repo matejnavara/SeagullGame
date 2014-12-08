@@ -4,6 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -12,7 +13,7 @@ public class Assets implements Disposable {
 	public static final Assets instance = new Assets();
 
 	private AssetManager assetManager;
-	
+
 	public TextureRegion map;
 	public TextureRegion player;
 	public TextureRegion fish;

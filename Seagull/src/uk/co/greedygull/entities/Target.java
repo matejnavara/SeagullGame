@@ -11,10 +11,11 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Target extends Entity {
 	
-	private float mapSpeed = Constants.MAP_SPEED;
+	//private float mapSpeed = Constants.MAP_SPEED;
+	private final int SCORE = 100;
 
 	public Target(Vector2 pos, Vector2 direction) {
-		super(Assets.TARGET, pos, direction);
+		super(Assets.TARGET, pos, new Vector2(Assets.TARGET.getWidth(),Assets.TARGET.getHeight()), direction);
 	}
 
 	@Override
@@ -27,6 +28,10 @@ public class Target extends Entity {
 			pos.set(x, y);
 		}
 		
+	}
+	
+	public int getScore(){
+		return SCORE;
 	}
 
 }

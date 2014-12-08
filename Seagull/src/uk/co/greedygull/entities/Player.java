@@ -13,16 +13,18 @@ public class Player extends Entity{
 	private EntityManager entityManager;
 	private boolean canShoot;
 	private long lastFire;
-	private int stamina;
+	
+	private static int stamina = 1000;
 
-	public Player(Vector2 pos, Vector2 direction, EntityManager entityManager) {
-		super(Assets.PLAYER, pos, direction);
+	public Player(Vector2 pos, Vector2 scale, Vector2 direction, EntityManager entityManager) {
+		super(Assets.PLAYER, pos, scale, direction);
 		this.entityManager = entityManager;
 		canShoot = true;
 	}
 
 	@Override
 	public void update() {
+		stamina--;
 		pos.add(direction);
 		
 		if((pos.x > 0) && (Gdx.input.isKeyPressed(Keys.LEFT))){
@@ -37,14 +39,12 @@ public class Player extends Entity{
 			setDirection(0,0);
 		
 		if(Gdx.input.isKeyPressed(Keys.SPACE)){
-			if(System.currentTimeMillis() - lastFire >= 500){
-			entityManager.addEntity(new Ammo(pos.cpy().add(Assets.PLAYER.getWidth()/2,0)));
-			lastFire = System.currentTimeMillis();
+			this.shoot();
 			}
 		}
-	}
 	
-	public int getStamina(){
+	
+	public static int getStamina(){
 		return stamina;
 	}
 	
@@ -52,16 +52,14 @@ public class Player extends Entity{
 		stamina = s;
 	}
 	
+	
 	public void shoot(){
-		
-//		if(canShoot != false){
-//		ammo.add(new Ammo(this.pos, new Vector2(0,0)));
-//		System.out.println("PLAYER SHOT");
-//	} else {
-//		System.out.println("Shot failed");
-//	}
+		if(System.currentTimeMillis() - lastFire >= 500){
+			entityManager.addEntity(new Ammo(pos.cpy().add(Assets.PLAYER.getWidth()/2,0)));
+			lastFire = System.currentTimeMillis();
+
+		}
 	}
-
-
+	
 	
 }

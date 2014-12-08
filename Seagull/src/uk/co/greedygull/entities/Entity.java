@@ -11,19 +11,21 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class Entity {
 	
 	protected Texture texture;
-	protected Vector2 pos, direction;
+	protected Vector2 pos, direction, scale;
 	protected Rectangle bounds;
 	
-	public Entity(Texture texture, Vector2 pos, Vector2 direction){
+	public Entity(Texture texture, Vector2 pos, Vector2 scale, Vector2 direction){
+		
 		this.texture = texture;
 		this.pos = pos;
+		this.scale = scale;
 		this.direction = direction;
 	}
 	
 	public abstract void update();
 	
 	public void render(SpriteBatch sb){
-		sb.draw(texture, pos.x, pos.y);
+		sb.draw(texture, pos.x, pos.y, scale.x, scale.y);
 	}
 	
 	public Vector2 getPosition(){
@@ -44,7 +46,7 @@ public abstract class Entity {
 		}
 	
 	public Rectangle getBounds(){
-		return bounds;
+		return new Rectangle(pos.x,pos.y,texture.getWidth(),texture.getHeight());
 	}
 	
 }

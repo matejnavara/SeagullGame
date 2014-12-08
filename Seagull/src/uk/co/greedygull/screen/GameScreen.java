@@ -2,6 +2,7 @@ package uk.co.greedygull.screen;
 
 import java.util.ArrayList;
 
+import uk.co.greedygull.GUI;
 import uk.co.greedygull.entities.Ammo;
 import uk.co.greedygull.entities.EntityManager;
 import uk.co.greedygull.entities.Player;
@@ -13,9 +14,8 @@ import com.badlogic.gdx.math.Vector2;
 
 public class GameScreen extends Screen {
 
-	private Player player;
-	private ArrayList<Ammo> ammo;
 	private Map map;
+	private GUI gui;
 	private EntityManager entityManager;
 	
 	private Vector2 SCROLLSPEED = new Vector2(0,-5f) ;
@@ -25,14 +25,15 @@ public class GameScreen extends Screen {
 
 		map = new Map();
 		entityManager = new EntityManager(5);
+		gui = new GUI();
 		
 	}
 	
 	@Override
 	public void update() {
 		map.update();
-		
 		entityManager.update();
+		gui.update();
 		
 	}
 
@@ -41,6 +42,7 @@ public class GameScreen extends Screen {
 		sb.begin();
 		map.render(sb);		
 		entityManager.render(sb);
+		gui.render(sb);
 		sb.end();		
 	}
 

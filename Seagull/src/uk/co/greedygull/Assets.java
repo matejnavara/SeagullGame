@@ -22,6 +22,9 @@ public class Assets implements Disposable {
 	public static Texture FISH = new Texture(Constants.FISH_TEX);
 	public static Texture AMMO = new Texture(Constants.AMMO_TEX);
 	public static Texture TARGET = new Texture(Constants.TARGET_TEX);
+	public static Texture TARGETHIT = new Texture(Constants.TARGETHIT_TEX);
+	public static Texture FOOD = new Texture(Constants.FOOD_TEX);
+	
 	public static Texture MAP = new Texture(Constants.SEAGULL_MAP);
 
 

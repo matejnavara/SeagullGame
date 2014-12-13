@@ -37,6 +37,11 @@ public abstract class Entity {
 		direction.scl(Gdx.graphics.getDeltaTime());
 	}
 	
+	public void setScale(float x, float y){
+		scale.set(x, y);
+		scale.scl(Gdx.graphics.getDeltaTime());
+	}
+	
 	public float getWidth(){
 		return this.texture.getWidth();			
 		}

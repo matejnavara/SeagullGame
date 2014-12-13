@@ -8,6 +8,7 @@ import uk.co.greedygull.util.CameraHelper;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL10;
@@ -15,10 +16,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public class Basicgame implements ApplicationListener {
+public class Basicgame extends Game {
 
-	private OrthographicCamera camera;
-	private CameraHelper cameraHelper;
+	private static OrthographicCamera camera;
 	private SpriteBatch batch;
 	
 	private boolean paused;
@@ -29,10 +29,8 @@ public class Basicgame implements ApplicationListener {
 		
 		Assets.instance.init(new AssetManager());
 		camera = new OrthographicCamera(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
-		camera.position.set(camera.viewportWidth/2f, camera.viewportHeight/2f, 0);
-//		cameraHelper = new CameraHelper();
-//		cameraHelper.applyTo(camera);
-		camera.update();
+		//camera.position.set(camera.viewportWidth/2f, camera.viewportHeight/2f, 0);
+		//camera.update();
 		
 		batch = new SpriteBatch();
 		ScreenManager.setScreen(new GameScreen());
@@ -81,5 +79,9 @@ public class Basicgame implements ApplicationListener {
 			ScreenManager.getCurrentScreen().dispose();
 		Assets.instance.dispose();
 		batch.dispose();
+	}
+	
+	public static OrthographicCamera getCam(){
+		return camera;
 	}
 }

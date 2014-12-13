@@ -1,5 +1,9 @@
 package uk.co.greedygull.util;
 
+import uk.co.greedygull.Assets;
+import uk.co.greedygull.Constants;
+import uk.co.greedygull.entities.Player;
+
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
@@ -14,7 +18,7 @@ public class CameraHelper {
 	
 	private Vector2 position;
 	private float zoom;
-	private Sprite target;
+	private Player target;
 	 
 	public CameraHelper () {
 		position = new Vector2();
@@ -24,8 +28,8 @@ public class CameraHelper {
 	public void update (float deltaTime) {
 		if(!hasTarget()) return;
 		
-		position.x = target.getX() + target.getOriginX();
-		position.y = target.getY() + target.getOriginY();
+		position.x = target.getPosition().x;
+		position.y = target.getPosition().y;
 	}
 	
 	public void setPosition (float x, float y) {
@@ -47,22 +51,28 @@ public class CameraHelper {
 	}
 	
 	//Target
-	public void setTarget (Sprite target) {
+	public void setTarget (Player target) {
+		if((target.getPosition().x > Constants.VIEWPORT_WIDTH/2) 
+				&& (target.getPosition().x < Assets.MAP.getWidth() - Constants.VIEWPORT_WIDTH/2)){
 		this.target = target;
+	} else {
+		this.target = null;	
+		}
 	}
-	public Sprite getTarget () {
+	public Player getTarget () {
 		return target;
 	}
 	public boolean hasTarget () {
 		return target != null;
 	}
-	public boolean hasTarget(Sprite target) {
+	public boolean hasTarget(Player target) {
 		return hasTarget() && this.target.equals(target);
 	}
 	
 	public void applyTo (OrthographicCamera camera){
 		camera.position.x = position.x;
-		camera.position.y = position.y;
+		camera.position.y = position.y + 150;
+		//TODO FIX RANDOM HACK ---------^^^^^
 		camera.zoom = zoom;
 		camera.update();
 	}

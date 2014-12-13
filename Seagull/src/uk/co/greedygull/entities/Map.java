@@ -15,6 +15,7 @@ public class Map {
 	private TextureRegion map;
 	
 	private float mapOffset;
+	private static float scroll;
 	private float mapSpeed = Constants.MAP_SPEED;
 	
 	public Map() {
@@ -27,7 +28,7 @@ public class Map {
 
 	public void update() {
 
-		mapOffset -= mapSpeed * Gdx.graphics.getDeltaTime();
+		mapOffset -= mapSpeed;
 		if(mapOffset <= 0)
 			mapOffset = mapTex.getHeight();
 		
@@ -38,6 +39,10 @@ public class Map {
 		sb.draw(map, 0, mapOffset - mapTex.getHeight(), mapTex.getWidth(), mapTex.getHeight());
 		sb.draw(map, 0, mapOffset, mapTex.getWidth(), mapTex.getHeight());
 
+	}
+	
+	public static float getScroll(){
+		return scroll;
 	}
 
 }

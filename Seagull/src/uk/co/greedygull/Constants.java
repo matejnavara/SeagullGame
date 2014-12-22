@@ -16,5 +16,6 @@ public class Constants {
 	public static final String TARGET_TEX = "data/target.png";
 	public static final String TARGETHIT_TEX = "data/targetHit.png";
 	public static final String FOOD_TEX = "data/burger.png";
+	public static final String GAMEOVER_TEX = "data/gameover.png";
 
 }

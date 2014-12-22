@@ -26,6 +26,8 @@ public class Assets implements Disposable {
 	public static Texture FOOD = new Texture(Constants.FOOD_TEX);
 	
 	public static Texture MAP = new Texture(Constants.SEAGULL_MAP);
+	
+	public static Texture GAMEOVER = new Texture(Constants.GAMEOVER_TEX);
 
 
 	public void init(AssetManager assetManager) {

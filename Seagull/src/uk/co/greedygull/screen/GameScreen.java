@@ -1,13 +1,10 @@
 package uk.co.greedygull.screen;
 
-import java.util.ArrayList;
-
 import uk.co.greedygull.Basicgame;
 import uk.co.greedygull.GUI;
-import uk.co.greedygull.entities.Ammo;
 import uk.co.greedygull.entities.EntityManager;
-import uk.co.greedygull.entities.Player;
 import uk.co.greedygull.entities.Map;
+import uk.co.greedygull.entities.Player;
 import uk.co.greedygull.util.CameraHelper;
 
 import com.badlogic.gdx.Gdx;
@@ -21,8 +18,6 @@ public class GameScreen extends Screen {
 	private GUI gui;
 	private EntityManager entityManager;
 	private CameraHelper cameraHelper;
-	
-	//private Vector2 SCROLLSPEED = new Vector2(0,-5f) ;
 
 
 	@Override
@@ -44,6 +39,10 @@ public class GameScreen extends Screen {
 		map.update();
 		entityManager.update();
 		gui.update();
+		
+		if(Player.isGameover()){
+			ScreenManager.setScreen(new GameoverScreen());
+		}
 		
 	}
 

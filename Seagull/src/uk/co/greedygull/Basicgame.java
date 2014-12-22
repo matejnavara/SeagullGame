@@ -1,9 +1,8 @@
 package uk.co.greedygull;
 
 
-import uk.co.greedygull.screen.GameScreen;
-import uk.co.greedygull.screen.MenuScreen;
-import uk.co.greedygull.screen.ScreenManager;
+import uk.co.greedygull.screen.*;
+
 import uk.co.greedygull.util.CameraHelper;
 
 import com.badlogic.gdx.Application;
@@ -33,7 +32,7 @@ public class Basicgame extends Game {
 		//camera.update();
 		
 		batch = new SpriteBatch();
-		ScreenManager.setScreen(new GameScreen());
+		ScreenManager.setScreen(new MenuScreen());
 		
 		paused = false;
 	}

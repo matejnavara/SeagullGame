@@ -53,8 +53,9 @@ public class CameraHelper {
 	//Target
 	public void setTarget (Player target) {
 		if((target.getPosition().x > Constants.VIEWPORT_WIDTH/2) 
-				&& (target.getPosition().x < Assets.MAP.getWidth() - Constants.VIEWPORT_WIDTH/2)){
-		this.target = target;
+				&& (target.getPosition().x < Assets.MAP.getWidth() - Constants.VIEWPORT_WIDTH/2)
+				&& target.hasStamina()){
+			this.target = target;
 	} else {
 		this.target = null;	
 		}

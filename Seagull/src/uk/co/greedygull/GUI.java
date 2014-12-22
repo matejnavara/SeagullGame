@@ -28,7 +28,7 @@ public class GUI {
 	
 	public void render(SpriteBatch sb){
 		font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		font.draw(sb, scoreName, Constants.VIEWPORT_WIDTH - 100, Constants.VIEWPORT_HEIGHT - 50);
+		font.draw(sb, scoreName, Basicgame.getCam().viewportWidth - 100, Constants.VIEWPORT_HEIGHT - 50);
 		font.draw(sb, staminaName, 20, Constants.VIEWPORT_HEIGHT - 50);
 		
 		if(fps >= 45){

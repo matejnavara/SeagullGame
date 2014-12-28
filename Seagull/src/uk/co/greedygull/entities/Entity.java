@@ -32,6 +32,10 @@ public abstract class Entity {
 		return pos;
 	}
 	
+	public Vector2 getDirection(){
+		return direction;
+	}
+	
 	public void setDirection(float x, float y){
 		direction.set(x,y);
 		direction.scl(Gdx.graphics.getDeltaTime());

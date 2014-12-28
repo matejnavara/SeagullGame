@@ -18,15 +18,15 @@ public class Target extends Entity {
 
 
 	public Target(Texture texture, Vector2 pos, Vector2 direction, boolean hit) {
-		super(texture, pos, new Vector2(Assets.TARGET.getWidth(),Assets.TARGET.getHeight()), direction);
+		super(texture, pos, new Vector2(texture.getWidth(),texture.getHeight()), direction);
 	}
 
 	@Override
 	public void update() {
 		pos.add(direction);
 		
-		if(!hit && pos.y < 0 - Assets.TARGET.getHeight()){
-			float x = MathUtils.random(0, Constants.VIEWPORT_WIDTH - Assets.TARGET.getWidth());
+		if(!hit && pos.y < 0 - this.getHeight()){
+			float x = MathUtils.random(0, Constants.VIEWPORT_WIDTH - this.getWidth());
 			float y = Constants.VIEWPORT_HEIGHT;
 			pos.set(x, y);
 		}
@@ -34,7 +34,12 @@ public class Target extends Entity {
 			
 		}
 		
-	
+//	public static Texture[] targetsTex = new Texture[]{
+//		 Assets.TARGET_1,
+//		 Assets.TARGETHIT_1,
+//		 Assets.TARGET_2,
+//		 Assets.TARGETHIT_2
+//	};
 	
 	public int getScore(){
 		return SCORE;

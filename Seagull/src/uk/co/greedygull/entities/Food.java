@@ -20,7 +20,7 @@ public class Food extends Entity{
 		pos.add(direction);
 		
 		if(pos.y < 0 - Assets.FOOD.getHeight()){
-			float x = MathUtils.random(0, Constants.VIEWPORT_WIDTH - Assets.TARGET.getWidth());
+			float x = MathUtils.random(0, Constants.VIEWPORT_WIDTH - Assets.FOOD.getWidth());
 			float y = Constants.VIEWPORT_HEIGHT;
 			pos.set(x, y);
 			}

@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Player extends Entity{
 	
 	private EntityManager entityManager;
+	public PlayerShadow shadow;
 	private boolean canShoot;
 	public boolean canSwoop;
 	private long lastFire;
@@ -24,17 +25,16 @@ public class Player extends Entity{
 
 	public Player(Vector2 pos, Vector2 scale, Vector2 direction, EntityManager entityManager) {
 		super(Assets.PLAYER, pos, scale, direction);
+		shadow = new PlayerShadow(new Vector2(pos.x +10,pos.y +150),direction);
 		this.entityManager = entityManager;
-		stamina = 500;
+		
+		stamina = 2000;
 		canShoot = true;
 		canSwoop = false;
 		hasStamina = true;
 		gameOver = false;
 	}
 	
-	public void playerShadow(){
-		
-	}
 
 	@Override
 	public void update() {
@@ -42,6 +42,7 @@ public class Player extends Entity{
 		
 		//MOVEMENT CONTROLS	
 		if(stamina > 0){
+			hasStamina = true;
 		if((pos.x > 0) && (Gdx.input.isKeyPressed(Keys.LEFT))){
 			setDirection(-300, 0);
 		
@@ -52,21 +53,25 @@ public class Player extends Entity{
 			setDirection(0,0);
 		
 		pos.add(direction);
+		shadow.pos.add(direction);
+		
 		}
 	
 		
 		if(stamina <= 0){
 			System.out.println("OUT OF STAMINA");
 			hasStamina = false;
+			canShoot = false;
 			setDirection(0, -50);
 			pos.add(direction);
+			shadow.pos.add(direction);
 			if(pos.y < 0 - Assets.PLAYER.getHeight()){
 				gameOver = true;
 			}
 		}
 	
 		
-		pos.add(direction);
+		//pos.add(direction);
 		
 		//SHOOTING ANIMATION
 		if(Gdx.input.isKeyPressed(Keys.SPACE)){
@@ -78,15 +83,24 @@ public class Player extends Entity{
 		if(canSwoop){
 			if(scale.y > 10){
 				scale.add(-1, -1);
+				shadow.pos.add(0, -5);
+				shadow.scale.scl(0.9f);
+
 			} else {
 				canSwoop = false;
 			}
 		}
 		//Swooping out
-		if(!canSwoop && (scale.y < Assets.PLAYER.getHeight()-1))
+		if(!canSwoop){
+			 if(scale.y < Assets.PLAYER.getHeight()+1)
 				scale.add(1, 1);
-				//System.out.println("SWOOPING OUT");
+				
+			 if(shadow.scale.y < Assets.PLAYERSHADOW.getHeight()+1){
+				shadow.scale.scl(1.1f);
+				shadow.pos.add(0, 5);
+			 }
 				canShoot = true;
+		}
 				
 		}
 		

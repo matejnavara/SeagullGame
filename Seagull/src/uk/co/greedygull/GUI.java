@@ -52,7 +52,7 @@ public class GUI {
 		score = score + s;
 	}
 	
-	public int getScore(){
+	public static int getScore(){
 		return score;
 	}
 	

@@ -7,6 +7,7 @@ import uk.co.greedygull.GUI;
 import uk.co.greedygull.util.CameraHelper;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -55,6 +56,7 @@ public class EntityManager {
 			e.render(sb);
 		}
 		player.render(sb);
+		player.shadow.render(sb);
 	}
 	
 	public void addEntity(Entity entity){
@@ -67,14 +69,20 @@ public class EntityManager {
 			System.out.println("Spawning Entities");
 		//Initiate Targets
 				for(int i = 0; i < maxTarget; i++){
-					float x = MathUtils.random(0, Constants.VIEWPORT_WIDTH - Assets.TARGET.getWidth());
+					
+					int rand = MathUtils.random(Assets.targetsTex.length-1);
+					
+					Texture Tex = Assets.targetsTex[rand];
+					
+					
+					float x = MathUtils.random(0, Constants.VIEWPORT_WIDTH - Tex.getWidth());
 					float y = (Constants.VIEWPORT_HEIGHT + MathUtils.random(i*100, i*200));
-					addEntity(new Target(Assets.TARGET,new Vector2(x,y),new Vector2(0,-scrollSpeed),false));			
+					addEntity(new Target(Tex,new Vector2(x,y),new Vector2(0,-scrollSpeed),false));			
 				}
 				
 				//Initiate Food
 				for(int i = 0; i < maxFood/2; i++){
-					float x = MathUtils.random(0, Constants.VIEWPORT_WIDTH - Assets.TARGET.getWidth());
+					float x = MathUtils.random(0, Constants.VIEWPORT_WIDTH - Assets.FOOD.getWidth());
 					float y = MathUtils.random(Constants.VIEWPORT_HEIGHT, (Constants.VIEWPORT_HEIGHT)*2);
 					addEntity(new Food(new Vector2(x,y),new Vector2(0,-scrollSpeed)));
 				}
@@ -87,7 +95,11 @@ public class EntityManager {
 				if(a.pos.y < 100){
 				if(t.getBounds().contains(a.getBounds())){
 					
-					t.texture = Assets.TARGETHIT;
+					for(int i=0; i<Assets.targetsTex.length; i++ ){
+						if(t.texture == Assets.targetsTex[i])
+							t.texture = Assets.targetsTexHit[i];
+					}
+					
 					t.hit = true;
 								
 					entities.removeValue(a, false);

@@ -20,6 +20,7 @@ public class EntityManager {
 	
 	private int maxTarget = 8;
 	private int maxFood = 2;
+	private int maxEnemy = 4;
 	
 	private long lastSpawn;
 	private float scrollSpeed;
@@ -42,13 +43,18 @@ public class EntityManager {
 		for(Entity e : entities){
 			e.update();
 		}
+		
 		for(Ammo a : getAmmo()){
 			if(a.checkEnd())
 				entities.removeValue(a, false);
 		}
+		for(Enemy e : getEnemies()){
+			if(e.checkEnd())
+				entities.removeValue(e, false);
+		}
+		
 		player.update();
 		checkCollisions();
-		checkFood();
 	}
 	
 	public void render(SpriteBatch sb){
@@ -71,9 +77,7 @@ public class EntityManager {
 				for(int i = 0; i < maxTarget; i++){
 					
 					int rand = MathUtils.random(Assets.targetsTex.length-1);
-					
-					Texture Tex = Assets.targetsTex[rand];
-					
+					Texture Tex = Assets.targetsTex[rand];	
 					
 					float x = MathUtils.random(0, Constants.VIEWPORT_WIDTH - Tex.getWidth());
 					float y = (Constants.VIEWPORT_HEIGHT + MathUtils.random(i*100, i*200));
@@ -86,10 +90,29 @@ public class EntityManager {
 					float y = MathUtils.random(Constants.VIEWPORT_HEIGHT, (Constants.VIEWPORT_HEIGHT)*2);
 					addEntity(new Food(new Vector2(x,y),new Vector2(0,-scrollSpeed)));
 				}
+				
+				//Initiate Enemies
+				for(int i = 0; i < maxEnemy; i++){
+					float x = MathUtils.random(0, Constants.VIEWPORT_WIDTH - Assets.CROW.getWidth());
+					float y = MathUtils.random(Constants.VIEWPORT_HEIGHT, (Constants.VIEWPORT_HEIGHT)*2);
+					addEntity(new Enemy(new Vector2(x,y),new Vector2(0,-scrollSpeed*2)));
+					System.out.println("SQUAAAK!");
+				}
+		
 		}
 	}
 	
 	private void checkCollisions(){
+		//COLLISION FOR ENEMIES
+		for(Enemy e : getEnemies()){
+			if(e.getBounds().overlaps(player.getBounds()) && e.canAttack()){
+				player.addStamina(-(e.getAttack()));
+				e.attack();
+				System.out.println("I KILL YOU!");
+			}
+		}
+		
+		//COLLISON FOR TARGETS
 		for(Target t : getTargets()){
 			for(Ammo a : getAmmo()){
 				if(a.pos.y < 100){
@@ -113,11 +136,10 @@ public class EntityManager {
 				}
 			}
 		}
-	}
-	
-	private void checkFood(){
+		
+		//COLLISION FOR FOOD
 		for(Food f : getFood()){
-			if(f.getBounds().overlaps(player.getBounds())){
+			if(f.getBounds().overlaps(player.getBounds()) && player.hasStamina()){
 				player.swoop();
 				if(player.scale.y < 11){
 				player.addStamina(f.getScore());
@@ -127,7 +149,9 @@ public class EntityManager {
 				}
 			}
 		}
+		
 	}
+
 	
 	//Retrieve Target entities from Entity array
 	private Array<Target> getTargets(){
@@ -160,6 +184,17 @@ public class EntityManager {
 			}
 		}
 		return food;
+	}
+	
+	//Retrieve Enemy entities from Entity array
+	private Array<Enemy> getEnemies(){
+		Array<Enemy> enemy = new Array<Enemy>();
+		for(Entity e : entities){
+			if(e instanceof Enemy){
+				enemy.add((Enemy) e);
+			}
+		}
+		return enemy;
 	}
 
 }

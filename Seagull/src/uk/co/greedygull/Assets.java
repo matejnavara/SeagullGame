@@ -18,6 +18,8 @@ public class Assets implements Disposable {
 	public TextureRegion player;
 	public TextureRegion fish;
 	
+	public static Texture INTRO = new Texture(Constants.SEAGULL_INTRO);
+	
 	public static Texture PLAYER = new Texture(Constants.PLAYER_TEX);
 	public static Texture PLAYERSHADOW = new Texture(Constants.PLAYERSHADOW_TEX);
 	public static Texture FISH = new Texture(Constants.FISH_TEX);
@@ -31,6 +33,7 @@ public class Assets implements Disposable {
 	public static Texture TARGET_4 = new Texture(Constants.TARGET_TEX_4);
 	public static Texture TARGETHIT_4 = new Texture(Constants.TARGETHIT_TEX_4);
 	public static Texture FOOD = new Texture(Constants.FOOD_TEX);
+	public static Texture CROW = new Texture(Constants.CROW_TEX);
 
 	public static Texture[] targetsTex = new Texture[]{
 		 TARGET_1,

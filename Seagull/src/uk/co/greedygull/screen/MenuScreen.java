@@ -1,5 +1,8 @@
 package uk.co.greedygull.screen;
 
+import uk.co.greedygull.Assets;
+import uk.co.greedygull.Constants;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -7,9 +10,11 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
@@ -20,6 +25,7 @@ public class MenuScreen extends Screen{
 	
 	Skin skin;
 	Stage stage;
+	
 
 	
 	@Override
@@ -29,28 +35,38 @@ public class MenuScreen extends Screen{
 		
 		skin = new Skin();
 		
-		Pixmap pixmap = new Pixmap(100, 100, Format.RGBA8888);
-		pixmap.setColor(Color.GREEN);
-		pixmap.fill();
-		skin.add("white", new Texture(pixmap));
-		
 		BitmapFont bfont = new BitmapFont();
 		bfont.scale(1);
 		skin.add("default",bfont);
 		
+		Pixmap pixmap = new Pixmap(150, 100, Format.RGBA8888);
+		pixmap.setColor(Color.GREEN);
+		pixmap.fill();
+		skin.add("white", new Texture(pixmap));
+		
+		Texture introTex = Assets.INTRO;
+		Image intro = new Image(introTex);
+		intro.setPosition(0, Constants.VIEWPORT_HEIGHT-introTex.getHeight());
 		
 		
 		TextButtonStyle textButtonStyle = new TextButtonStyle();
 		textButtonStyle.up = skin.newDrawable("white", Color.DARK_GRAY);
-		textButtonStyle.down = skin.newDrawable("white", Color.RED);
-		
+		textButtonStyle.down = skin.newDrawable("white", Color.RED);		
 		textButtonStyle.font = skin.getFont("default");
 		
 		final TextButton textButton = new TextButton("PLAY",textButtonStyle);
-		textButton.setPosition(200, 200);
+		textButton.setPosition(100 + textButton.getWidth()/2, 270);
+		
+		final TextButton textButton2 = new TextButton("HOW TO", textButtonStyle);
+		textButton2.setPosition(100 + textButton2.getWidth()/2, 160);
+		
+		final TextButton textButton3 = new TextButton("UPGRADE", textButtonStyle);
+		textButton3.setPosition(100 + textButton3.getWidth()/2, 50);
+		
+		stage.addActor(intro);
 		stage.addActor(textButton);
-		stage.addActor(textButton);
-		stage.addActor(textButton);
+		stage.addActor(textButton2);
+		stage.addActor(textButton3);
 
 		textButton.addListener(new ClickListener(){
 			@Override
@@ -59,13 +75,7 @@ public class MenuScreen extends Screen{
 				ScreenManager.setScreen(new GameScreen());
 			}
 		});
-//		textButton.addListener(new ChangeListener(){
-//			public void changed(ChangeEvent event, Actor actor){
-//				textButton.setText("Bombs Away!");
-//				ScreenManager.setScreen(new GameScreen());
-//			}
-//		}
-//		);
+
 
 	}
 	

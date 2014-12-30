@@ -3,6 +3,7 @@ package uk.co.greedygull.entities;
 
 import uk.co.greedygull.Assets;
 import uk.co.greedygull.Constants;
+import uk.co.greedygull.Skills;
 import uk.co.greedygull.util.CameraHelper;
 
 import com.badlogic.gdx.Gdx;
@@ -15,20 +16,24 @@ public class Player extends Entity{
 	public PlayerShadow shadow;
 	private boolean canShoot;
 	public boolean canSwoop;
-	private long lastFire;
 	private boolean hasStamina;
+	private long lastFire;
 	
 	public static boolean gameOver;
 	
 	
 	private static int stamina;
+	private static int fireRate;
+	private static int movement;
 
 	public Player(Vector2 pos, Vector2 scale, Vector2 direction, EntityManager entityManager) {
 		super(Assets.PLAYER, pos, scale, direction);
 		shadow = new PlayerShadow(new Vector2(pos.x +10,pos.y +150),direction);
 		this.entityManager = entityManager;
 		
-		stamina = 2000;
+		stamina = Skills.getSTAMINA();
+		fireRate = Skills.FIRERATE;
+		movement = Skills.MOVEMENTSPEED;
 		canShoot = true;
 		canSwoop = false;
 		hasStamina = true;
@@ -44,10 +49,10 @@ public class Player extends Entity{
 		if(stamina > 0){
 			hasStamina = true;
 		if((pos.x > 0) && (Gdx.input.isKeyPressed(Keys.LEFT))){
-			setDirection(-300, 0);
+			setDirection(-movement, 0);
 		
 		} else if((pos.x +Assets.PLAYER.getWidth() < Assets.MAP.getWidth()) && (Gdx.input.isKeyPressed(Keys.RIGHT))){
-			setDirection(300, 0);
+			setDirection(movement, 0);
 		
 		} else
 			setDirection(0,0);
@@ -62,7 +67,7 @@ public class Player extends Entity{
 			System.out.println("OUT OF STAMINA");
 			hasStamina = false;
 			canShoot = false;
-			setDirection(0, -50);
+			setDirection(0, -100);
 			pos.add(direction);
 			shadow.pos.add(direction);
 			if(pos.y < 0 - Assets.PLAYER.getHeight()){
@@ -70,8 +75,6 @@ public class Player extends Entity{
 			}
 		}
 	
-		
-		//pos.add(direction);
 		
 		//SHOOTING ANIMATION
 		if(Gdx.input.isKeyPressed(Keys.SPACE)){
@@ -123,7 +126,7 @@ public class Player extends Entity{
 	
 	public void shoot(){
 		if(canShoot){
-			if(System.currentTimeMillis() - lastFire >= 500){
+			if(System.currentTimeMillis() - lastFire >= fireRate){
 				entityManager.addEntity(new Ammo(pos.cpy().add(Assets.PLAYER.getWidth()/2,0)));
 				lastFire = System.currentTimeMillis();
 			}		

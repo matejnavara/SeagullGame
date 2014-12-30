@@ -8,6 +8,8 @@ public class Constants {
 	
 	public static final String DEFAULT_FONT = "data/font.ttf";
 	
+	public static final String SEAGULL_INTRO = "data/greedygull.png";
+	
 	public static final String SEAGULL_MAP = "data/SeagullMap.png";
 	
 	public static final String PLAYER_TEX = "data/gull_01.gif";
@@ -23,6 +25,8 @@ public class Constants {
 	public static final String TARGETHIT_TEX_3 = "data/target_3Hit.png";
 	public static final String TARGET_TEX_4 = "data/target_4.png";
 	public static final String TARGETHIT_TEX_4 = "data/target_4Hit.png";
+	
+	public static final String CROW_TEX = "data/crow.png";
 	
 	public static final String FOOD_TEX = "data/burger.png";
 	public static final String GAMEOVER_TEX = "data/gameover.png";

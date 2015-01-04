@@ -17,6 +17,7 @@ public class Player extends Entity{
 	private boolean canShoot;
 	public boolean canSwoop;
 	private boolean hasStamina;
+	
 	private long lastFire;
 	
 	public static boolean gameOver;
@@ -32,8 +33,8 @@ public class Player extends Entity{
 		this.entityManager = entityManager;
 		
 		stamina = Skills.getSTAMINA();
-		fireRate = Skills.FIRERATE;
-		movement = Skills.MOVEMENTSPEED;
+		fireRate = Skills.getFIRERATE();
+		movement = Skills.getMOVEMENTSPEED();
 		canShoot = true;
 		canSwoop = false;
 		hasStamina = true;

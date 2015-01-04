@@ -72,16 +72,16 @@ public class GameoverScreen extends Screen {
 		
 		skillPoints = score/1000;
 		Skills.addSKILLPOINTS(skillPoints);		
-		int skill = Skills.getSKILLPOINTS();
+		//int skill = Skills.getSKILLPOINTS();
 		
-		String finalSkill = "SKILL POINTS: " + skill;
+		String finalSkill = "GAINED: " + skillPoints + " skill points";
 		String finalScore = "SCORE: " + score;
 		
 		Label skillLabel = new Label(finalSkill, ls);
-		skillLabel.setPosition(100, 200);
+		skillLabel.setPosition(50, 200);
 		
 		Label scoreLabel = new Label(finalScore, ls);
-		scoreLabel.setPosition(100, 300);
+		scoreLabel.setPosition(50, 300);
 		
 		//BUTTONS
 		final TextButton playAgain = new TextButton("PLAY AGAIN",tbs);
@@ -100,6 +100,13 @@ public class GameoverScreen extends Screen {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				ScreenManager.setScreen(new GameScreen());
+			}
+		});
+		
+		upgrade.addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				ScreenManager.setScreen(new UpgradeScreen());
 			}
 		});
 	}
@@ -133,7 +140,8 @@ public class GameoverScreen extends Screen {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		stage.dispose();
+		skin.dispose();
 		
 	}
 

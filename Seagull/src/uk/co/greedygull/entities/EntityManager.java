@@ -20,9 +20,12 @@ public class EntityManager {
 	
 	private int maxTarget = 8;
 	private int maxFood = 2;
-	private int maxEnemy = 4;
+	private int maxEnemy = 3;
+	
+	private int spawnRate = 1000;
 	
 	private long lastSpawn;
+	
 	private float scrollSpeed;
 
 	
@@ -74,6 +77,7 @@ public class EntityManager {
 			scrollSpeed = Constants.MAP_SPEED;
 			System.out.println("Spawning Entities");
 		//Initiate Targets
+			//if(System.currentTimeMillis() - lastSpawn >= spawnRate){
 				for(int i = 0; i < maxTarget; i++){
 					
 					int rand = MathUtils.random(Assets.targetsTex.length-1);
@@ -98,10 +102,10 @@ public class EntityManager {
 					addEntity(new Enemy(new Vector2(x,y),new Vector2(0,-scrollSpeed*2)));
 					System.out.println("SQUAAAK!");
 				}
-		
+				//lastSpawn = System.currentTimeMillis();
+			}
 		}
-	}
-	
+		
 	private void checkCollisions(){
 		//COLLISION FOR ENEMIES
 		for(Enemy e : getEnemies()){

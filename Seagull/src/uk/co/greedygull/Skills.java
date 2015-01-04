@@ -2,10 +2,10 @@ package uk.co.greedygull;
 
 public class Skills {
 	
-	private static int SKILLPOINTS = 0;
+	private static int SKILLPOINTS = 100;
 	private static int STAMINA = 1000;
-	public static int FIRERATE = 750;
-	public static int MOVEMENTSPEED = 250;
+	private static int FIRERATE = 750;
+	private static int MOVEMENTSPEED = 250;
 	
 	public static int getSKILLPOINTS(){
 		return SKILLPOINTS;
@@ -19,15 +19,23 @@ public class Skills {
 		return STAMINA;
 	}
 	
-	public void addSTAMINA(int s){
+	public static int getFIRERATE(){
+		return FIRERATE;
+	}
+	
+	public static int getMOVEMENTSPEED(){
+		return MOVEMENTSPEED;
+	}
+	
+	public static void addSTAMINA(int s){
 		STAMINA = STAMINA + s;
 	}
 	
-	public void addFIRERATE(int s){
+	public static void addFIRERATE(int s){
 		FIRERATE = FIRERATE - s;
 	}
 	
-	public void addMOVEMENTSPEED(int s){
+	public static void addMOVEMENTSPEED(int s){
 		MOVEMENTSPEED = MOVEMENTSPEED + s;
 	}
 

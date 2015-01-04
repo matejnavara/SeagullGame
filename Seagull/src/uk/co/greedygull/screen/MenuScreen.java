@@ -26,6 +26,7 @@ public class MenuScreen extends Screen{
 	Skin skin;
 	Stage stage;
 	
+	TextButtonStyle textButtonStyle;
 
 	
 	@Override
@@ -49,7 +50,7 @@ public class MenuScreen extends Screen{
 		intro.setPosition(0, Constants.VIEWPORT_HEIGHT-introTex.getHeight());
 		
 		
-		TextButtonStyle textButtonStyle = new TextButtonStyle();
+		textButtonStyle = new TextButtonStyle();
 		textButtonStyle.up = skin.newDrawable("white", Color.DARK_GRAY);
 		textButtonStyle.down = skin.newDrawable("white", Color.RED);		
 		textButtonStyle.font = skin.getFont("default");
@@ -71,8 +72,14 @@ public class MenuScreen extends Screen{
 		textButton.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				textButton.setText("Bombs Away!");
 				ScreenManager.setScreen(new GameScreen());
+			}
+		});
+		
+		textButton3.addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				ScreenManager.setScreen(new UpgradeScreen());
 			}
 		});
 
